@@ -32,19 +32,23 @@ function getRaces() {
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState == 4) {
             if (xmlHttp.status == 200) {
+
                 var retVal = JSON.parse(this.responseText);
+         
+                //debugger
+                var newVar = []
 
-                console.log(retVal);
+                var totalResult = (retVal.results).length;
 
-                var data = [];
-                data.push(retVal);
-                console.log(data);
-                data.forEach(function(item) {
-                    console.log(item.count);
-                })
+                for (let i = 0; i < totalResult ; i++) {
+                    console.log(retVal.results[i].name);
+                }
 
             }
         }
+       
     }
     xmlHttp.send();
 }
+
+

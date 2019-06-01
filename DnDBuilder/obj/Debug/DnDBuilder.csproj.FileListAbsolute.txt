@@ -58,6 +58,7 @@ C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Net.Http.Formatti
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.xml
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.WebHost.xml
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csprojAssemblyReference.cache
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.CoreCompileInputs.cache
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.CopyComplete
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.dll

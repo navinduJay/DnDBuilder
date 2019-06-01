@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DnDBuilder.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,23 +45,21 @@ namespace DnDBuilder.Controllers
 					streamReader.Close();
 
 				}
-				
-
 			}
 			catch (WebException ex) {
 
-				Console.WriteLine(ex);
+				Console.WriteLine(ex +"WebException Throwed");
 			}
 			return result;
 			
 		}
 
-
 		[HttpGet]
 		[Route("DnD/Char/Races")]
-		public string LoadRaces()
+		public object LoadRaces()
 		{
-			string result = "";
+			string result = null;
+			dynamic json = null;
 
 			try
 			{
@@ -69,7 +69,6 @@ namespace DnDBuilder.Controllers
 				HttpWebResponse responseObjectGet = null;
 				responseObjectGet = (HttpWebResponse)requestObjectGet.GetResponse();
 
-				result = null;
 				using (Stream stream = responseObjectGet.GetResponseStream())
 				{
 					StreamReader streamReader = new StreamReader(stream);
@@ -78,20 +77,22 @@ namespace DnDBuilder.Controllers
 
 				}
 
-
+				json = JsonConvert.DeserializeObject(result);
+				var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+			
 			}
 			catch (WebException ex)
 			{
 
-				Console.WriteLine(ex);
+				Console.WriteLine(ex + "WebException Throwed");
 			}
-			return result;
+			catch (ArgumentException ex) {
+
+				Console.WriteLine(ex + "ArgumentException Throwed");
+			}
+
+			return json;
 
 		}
-
-
-
 	}
-
-
 }
