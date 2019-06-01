@@ -1,2 +1,0 @@
-# DnDBuilder
-Distributed Computing Assignment 
