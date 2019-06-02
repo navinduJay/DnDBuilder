@@ -13,6 +13,9 @@ namespace DnDBuilder
 		{
 			if(!IsPostBack)
 				Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "getRaces()", true);
+				
 		}
+
+		
 	}
 }

@@ -1,4 +1,4 @@
-﻿using DnDBuilder.Models;
+﻿
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -87,6 +87,90 @@ namespace DnDBuilder.Controllers
 				Console.WriteLine(ex + "WebException Throwed");
 			}
 			catch (ArgumentException ex) {
+
+				Console.WriteLine(ex + "ArgumentException Throwed");
+			}
+
+			return json;
+
+		}
+
+		[HttpGet]
+		[Route("DnD/Char/Classes")]
+		public object LoadClasses()
+		{
+			string result = null;
+			dynamic json = null;
+
+			try
+			{
+				string strurtest = String.Format("http://www.dnd5eapi.co/api/classes/");
+				WebRequest requestObjectGet = WebRequest.Create(strurtest);
+				requestObjectGet.Method = "GET";
+				HttpWebResponse responseObjectGet = null;
+				responseObjectGet = (HttpWebResponse)requestObjectGet.GetResponse();
+
+				using (Stream stream = responseObjectGet.GetResponseStream())
+				{
+					StreamReader streamReader = new StreamReader(stream);
+					result = streamReader.ReadToEnd();
+					streamReader.Close();
+
+				}
+
+				json = JsonConvert.DeserializeObject(result);
+				var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+			}
+			catch (WebException ex)
+			{
+
+				Console.WriteLine(ex + "WebException Throwed");
+			}
+			catch (ArgumentException ex)
+			{
+
+				Console.WriteLine(ex + "ArgumentException Throwed");
+			}
+
+			return json;
+
+		}
+
+		[HttpGet]
+		[Route("DnD/Char/Classes/{userInput}")]
+		public object LoadClassEntry(int userInput)
+		{
+			string result = null;
+			dynamic json = null;
+
+			try
+			{
+				string strurtest = String.Format("http://www.dnd5eapi.co/api/classes/" + userInput);
+				WebRequest requestObjectGet = WebRequest.Create(strurtest);
+				requestObjectGet.Method = "GET";
+				HttpWebResponse responseObjectGet = null;
+				responseObjectGet = (HttpWebResponse)requestObjectGet.GetResponse();
+
+				using (Stream stream = responseObjectGet.GetResponseStream())
+				{
+					StreamReader streamReader = new StreamReader(stream);
+					result = streamReader.ReadToEnd();
+					streamReader.Close();
+
+				}
+
+				json = JsonConvert.DeserializeObject(result);
+				var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+			}
+			catch (WebException ex)
+			{
+
+				Console.WriteLine(ex + "WebException Throwed");
+			}
+			catch (ArgumentException ex)
+			{
 
 				Console.WriteLine(ex + "ArgumentException Throwed");
 			}

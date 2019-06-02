@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddCharacter.aspx.cs" Inherits="DnDBuilder.AddCharacter" %>
+﻿<%@ Page Language="C#" MaintainScrollPositionOnPostBack="true" AutoEventWireup="true" CodeBehind="AddCharacter.aspx.cs" Inherits="DnDBuilder.AddCharacter" %>
 
 <!DOCTYPE html>
 
@@ -6,6 +6,9 @@
 <head runat="server">
     <title>Add a Character</title>
    <script src="Index.js"> </script>
+    <script>
+       
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -40,18 +43,14 @@
                     </tr>
                       <tr>
                         <td><asp:Label Text="Level" runat="server" /></td>
-                        <td> <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox></td>
+                        <td> <input type="text"  id="level" oninput="getEntry()" placeholder="Level" /></td>
                     </tr>
                      <tr>
                         <td><asp:Label Text="Race" runat="server" /></td>
                         <td>    
-                            <asp:DropDownList ID="DropDownList2" runat="server">
-                                 <asp:ListItem Enabled="true" Text="Select Race" Value="-1"></asp:ListItem>
-                                 <asp:ListItem Text="Dwarf" Value="1"></asp:ListItem>
-                                 <asp:ListItem Text="Elf" Value="2"></asp:ListItem>
-                                 <asp:ListItem Text="Halfling" Value="12"></asp:ListItem>
-                                 <asp:ListItem Text="Human" Value="12"></asp:ListItem>
-                            </asp:DropDownList>
+                              <select id="race">
+                            <option></option>
+                            </select>
 
                         </td>
                          
@@ -63,13 +62,10 @@
                     <tr>
                         <td><asp:Label Text="Class" runat="server" /></td>
                         <td>
-                             <asp:DropDownList ID="DropDownList3" runat="server">
-                                 <asp:ListItem Enabled="true" Text="Select Class" Value="-1"></asp:ListItem>
-                                 <asp:ListItem Text="Barbarian" Value="1"></asp:ListItem>
-                                 <asp:ListItem Text="Bard" Value="2"></asp:ListItem>
-                                 <asp:ListItem Text="Cleric" Value="12"></asp:ListItem>
-                                 <asp:ListItem Text="Druid" Value="12"></asp:ListItem>
-                            </asp:DropDownList>
+                             
+                              <select id="class" onchange="getEntry()">
+                            <option></option>
+                            </select>
                         </td>
 
                           
@@ -79,15 +75,20 @@
                          </td>
 
                     </tr>
-
+                   
                     <tr>
                         <td><asp:Label Text="Is a Spellcaster?" runat="server" /></td>
-                         <td> <p>YES/NO</p></td>
+                         <td> <p id="isASpellcaster">NO</p></td>
                     </tr>
 
                      <tr>
                         <td><asp:Label Text="Consition Score: " runat="server" /></td>
-                         <td> <p>50</p></td>
+                         <td> <p id="cScore">12</p></td>
+                    </tr>
+
+                    <tr>
+                        <td><asp:Label Text=" " runat="server" /></td>
+                         <td> <input type="button" id="abutton" name="name" value="Save Character" /> </td>
                     </tr>
                 </table>
 
