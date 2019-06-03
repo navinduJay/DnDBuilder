@@ -4,7 +4,7 @@ function init() {
     let xmlHttp = new XMLHttpRequest();
     let userInput = document.getElementById('TextBox1').value;
     let dest = '/DnD/Char/' + userInput
-    //console.log(userInput);
+    
     xmlHttp.open("GET", dest , true);
 
     xmlHttp.onreadystatechange = function() {
@@ -17,21 +17,15 @@ function init() {
             }
         }
     }
-    xmlHttp.send();
-
-    
+    xmlHttp.send();    
 }
 
-
 function getRaces() {
-
-
 
     let xmlHttp = new XMLHttpRequest();
     var elementRace = document.getElementById('race');
    
     let dest = '/DnD/Char/Races' 
-    //console.log(element);
     xmlHttp.open("GET", dest, true);
 
     xmlHttp.onreadystatechange = function () {
@@ -40,8 +34,6 @@ function getRaces() {
 
                 var retVal = JSON.parse(this.responseText);
          
-                //debugger
-           
                 var totalResult = (retVal.results).length;
 
                 for (let i = 0; i < totalResult; i++) {
@@ -49,10 +41,8 @@ function getRaces() {
                     elementRace.options[i] = new Option(retVal.results[i].name);
                     
                 }
-
             }
-        }
-       
+        }   
     }
     xmlHttp.send();
     getClasses();
@@ -64,13 +54,11 @@ function getClasses() {
 
     getEntry();
     
-
-
     let xmlHttp = new XMLHttpRequest();
     let elementClass = document.getElementById('class');
 
     let dest = '/DnD/Char/Classes'
-    //console.log(element);
+
     xmlHttp.open("GET", dest, true);
 
     xmlHttp.onreadystatechange = function () {
@@ -78,47 +66,29 @@ function getClasses() {
             if (xmlHttp.status == 200) {
 
                 var retVal = JSON.parse(this.responseText);
-                //debugger
                 var totalResult = (retVal.results).length;
 
-                let d;
+               
                 let i = 0;
                 for (i ; i < totalResult; i++) {
                     
                     elementClass.options[i] = new Option(retVal.results[i].name);
                    
-                } 
-        
-                if (elementClass.options[0].value) {
-
-                }
-            
+                }   
             }
         }
-
     }
     xmlHttp.send();
-
-
-    
 }
 
 function getEntry() {
 
-    
-    
-  //  debugger
-  
     let xmlHttp = new XMLHttpRequest();
     let elementClass = document.getElementById('class').value;
     let spellCasting = document.getElementById('isASpellcaster');
-    
 
-   
+
     let entry;
-
-    let op = document.getElementById('op');
-    var id;
 
     let dest = '/DnD/Char/Classes'
    
@@ -188,31 +158,60 @@ function getEntry() {
                             var retVal = JSON.parse(this.responseText);
 
                             if (retVal.spellcasting) {
+                                spellCasting.style.color = '#0b8457';
                                 spellCasting.innerHTML = 'YES'
                             } else {
+                                spellCasting.style.color = '#e41749';
                                 spellCasting.innerHTML = 'NO'
                             }
 
                             var x = document.getElementById("level").value;
                             var score = document.getElementById("cScore");
-                            var result = retVal.hit_die * parseFloat(x)
-                            score.innerHTML = result;
-                         
-;
-                         
+                            var name = document.getElementById('name');
+                            var levelError = document.getElementById('levelError');
+                            var nameError = document.getElementById('nameError');
+
+                            // level value calculation
+                            var result = retVal.hit_die * parseFloat(x);
+
+                            
+
+                           // Javascript string validations
+
+                            if (name == '') {
+                                nameError.innerHTML = 'Name can not be empty!';
+                            } else {
+                                nameError.innerHTML = ''
+                            }
+
+
+                            if (x <= 0 || x > 20) {
+                                levelError.innerHTML = 'Level should be a number between 1-20!';
+                            } else {
+                                levelError.innerHTML = ''
+                            }
+
+                            if (isNaN(result)) {
+                                score.innerHTML = retVal.hit_die
+
+                            } else if (x <= 0 || x > 20) {
+                                score.style.color = '#e41749'
+                                score.innerHTML = 'CHECK YOUR LEVEL VALUE';
+                            } else {
+                                score.innerHTML = result;
+                            }
+                                             
+                   
                         }
                     }
                 }
                 req.send();
-
             }
-
         }
     }
     xmlHttp.send();
 
-   
-
 }
+
 
 

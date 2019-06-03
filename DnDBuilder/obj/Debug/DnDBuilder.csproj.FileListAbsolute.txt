@@ -49,7 +49,7 @@ C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\roslyn\VBCSCompiler.exe
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\Newtonsoft.Json.dll
-C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\SQLite.NET.dll
+C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Data.SQLite.dll
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Net.Http.Formatting.dll
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.dll
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.WebHost.dll
@@ -58,6 +58,7 @@ C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Net.Http.Formatti
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.xml
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\System.Web.Http.WebHost.xml
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csprojAssemblyReference.cache
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.CoreCompileInputs.cache
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.CopyComplete
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.dll

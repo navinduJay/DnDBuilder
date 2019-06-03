@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,6 +17,10 @@ namespace DnDBuilder
 				
 		}
 
-		
+		protected void Button1_Click(object sender, EventArgs e)
+		{
+			SQLiteConnection connection = new SQLiteConnection();
+			connection.Open();
+		}
 	}
 }

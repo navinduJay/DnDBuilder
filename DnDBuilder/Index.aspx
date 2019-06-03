@@ -6,6 +6,7 @@
 <head runat="server">
     <title></title>
     <script src="Index.js"> </script>
+    <script src="Character.js"> </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -23,9 +24,13 @@
             <h1>Navigation</h1>
             
           <asp:HyperLink NavigateUrl="~/AddCharacter.aspx" ID="HyperLink2" runat="server">Create a Character</asp:HyperLink>
-            
+            <br /> <br />
+          <asp:HyperLink NavigateUrl="~/ViewAllCharacters.aspx" ID="HyperLink1" runat="server">View Character List</asp:HyperLink>
         </div>
         
     </form>
+
+
+
 </body>
 </html>
