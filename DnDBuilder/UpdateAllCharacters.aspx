@@ -1,24 +1,67 @@
-﻿<%@ Page Language="C#"  MaintainScrollPositionOnPostBack="true" AutoEventWireup="true" CodeBehind="AddCharacter.aspx.cs" Inherits="DnDBuilder.AddCharacter" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpdateAllCharacters.aspx.cs" Inherits="DnDBuilder.UpdateAllCharacters" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Add a Character</title>
-   <script src="Index.js"> </script>
-    <script src="Character.js"> </script>
- 
+    <title>Update Characters</title>
+        <style>
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 0px solid ;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+    </style>
+    <script src="Character.js"></script>
+     <script src="Index.js"></script>
+    
 </head>
+
 <body>
+    <h1>Character Database</h1>
     <form id="form1" runat="server">
         <div>
-            <h1>Create a New Character</h1>
-            <p>
-                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-            </p>
+               <table id="table" >
+  <tr>
+    <th>Name</th>
+    <th>Race</th>
+    <th>Class</th>
+    <th>Level</th>
+
+  </tr>
+        
+
+  </table>
+            <hr />
+            <br />
+            <div>
+            <h1>Update Character Details</h1>
             
 
-                <table>
+
+                
+
+            <h4>Search by Character's Name to Load Details</h4>
+              
+                
+            <p>
+            </p>
+            
+                 <table>
+                      <tr>
+                        <td><input type="text" id="searchName" value="" placeholder="Character Name"/></td>
+                        <td> <input type="button" onclick="searchCharacter()" name="name" value="Search Character" /> </td>
+                    </tr>
                     <tr>
                      <td><asp:Label Text="Name" runat="server" /></td>
                      <td> <input type="text" id="name" value="" /> </td>
@@ -97,12 +140,17 @@
                     </tr>
 
                     <tr>
-                        <td><asp:Label Text=" " runat="server" /></td>
-                         <td> <input type="button" id="abutton" onclick="getCharacterInfo()"  value="Save Character" /> </td>
+                       
+                         <td> <input type="button" id="abutton" onclick="updateCharacter()"  value="Save Character" /> </td>
+                          <td> <input type="button" id="abuttontwo" onclick="deleteCharacter()"  value="Delete Character" /> </td>
                     </tr>
                 </table>
 
+
       
+        </div>
+
+            
         </div>
     </form>
 </body>

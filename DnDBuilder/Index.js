@@ -46,6 +46,8 @@ function getRaces() {
     }
     xmlHttp.send();
     getClasses();
+    viewCharacters();
+
 }
 
 
@@ -213,5 +215,49 @@ function getEntry() {
 
 }
 
+
+function viewCharacters() {
+
+    let cName = document.getElementById('cName');
+
+    let xhr = new XMLHttpRequest();
+    let dest = '/DnD/Char/View/List';
+    let table = document.getElementById('table');
+    xhr.open("GET", dest, false);
+
+    xhr.onreadystatechange = function () {
+
+        let retVal = JSON.parse(this.responseText);
+        //console.log(retVal[]);
+        let newReq = new XMLHttpRequest();
+        let newDest = '/DnD/Char/View/Update'
+
+
+
+        for (var i = 1;  retVal[i][0].length; i++) {
+
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = retVal[i][0];
+            cell2.innerHTML = retVal[i][1]
+            cell3.innerHTML = retVal[i][2];
+            cell4.innerHTML = retVal[i][3];
+        }
+
+
+
+
+
+    }
+
+
+
+    xhr.send();
+
+
+}
 
 

@@ -6,6 +6,7 @@
 <head runat="server">
     <title>View Character List</title>
     <script src="Character.js"></script>
+   <script src="Index.js"></script>
     <style>
         table {
   font-family: arial, sans-serif;
@@ -39,6 +40,7 @@ tr:nth-child(even) {
         
   </table>
 
+             <input type="button" id="abutton" onclick="viewCharacters()"  value="Update Information" />
 
         </div>
     </form>

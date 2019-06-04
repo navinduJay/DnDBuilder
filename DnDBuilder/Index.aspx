@@ -26,6 +26,8 @@
           <asp:HyperLink NavigateUrl="~/AddCharacter.aspx" ID="HyperLink2" runat="server">Create a Character</asp:HyperLink>
             <br /> <br />
           <asp:HyperLink NavigateUrl="~/ViewAllCharacters.aspx" ID="HyperLink1" runat="server">View Character List</asp:HyperLink>
+                 <br /> <br />
+          <asp:HyperLink NavigateUrl="~/UpdateAllCharacters.aspx" ID="HyperLink3" runat="server">Update Characters</asp:HyperLink>
         </div>
         
     </form>

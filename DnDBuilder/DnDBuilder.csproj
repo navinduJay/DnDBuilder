@@ -91,6 +91,7 @@
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="Index.js" />
+    <Content Include="UpdateAllCharacters.aspx" />
     <Content Include="ViewAllCharacters.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -115,6 +116,13 @@
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateAllCharacters.aspx.cs">
+      <DependentUpon>UpdateAllCharacters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateAllCharacters.aspx.designer.cs">
+      <DependentUpon>UpdateAllCharacters.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewAllCharacters.aspx.cs">
       <DependentUpon>ViewAllCharacters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

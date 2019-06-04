@@ -286,7 +286,7 @@ namespace DnDBuilder.Controllers
 					while (reader.Read())
 					{
 					
-						dictionary.Add(i, new List<string> { (string)reader["name"], (string)reader["race"], (string)reader["class"], (string)reader["level"] });
+						dictionary.Add(i, new List<string> { (string)reader[0], (string)reader[5], (string)reader[6], (string)reader[4] });
 						i = i + 1;
 
 					}
@@ -303,6 +303,147 @@ namespace DnDBuilder.Controllers
 
 			return dictionary;
 		}
+
+
+
+
+		[HttpGet]
+		[Route("DnD/Char/Search/{userInput}")]
+		public Dictionary<int, List<string>> SearchCharacter(string userInput)
+		{
+			Dictionary<int, List<string>> dictionary = new Dictionary<int, List<string>>();
+
+			Console.WriteLine(userInput);
+			
+			try
+			{
+
+				using (SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=C:\\Users\\Navindu\\source\\repos\\DnDBuilder\\DnDBuilder\\bin\\DnD.sqlite"))
+				{
+					m_dbConn.Open();
+					string sql = "select * from characters where name = ('" + userInput + "') ";
+					SQLiteCommand command = new SQLiteCommand(sql, m_dbConn);
+					SQLiteDataReader reader = command.ExecuteReader();
+					var i = 1;
+					while (reader.Read())
+					{
+
+						dictionary.Add(i, new List<string> { (string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8] });
+						i = i + 1;
+
+					}
+				}
+			}
+			catch (Exception e) when (e is NullReferenceException || e is SQLiteException || e is InvalidCastException)
+			{
+				Console.WriteLine(e);
+			}
+			catch (ArgumentException ex)
+			{
+				Console.WriteLine(ex);
+			}
+			
+			return dictionary;
+		}
+
+
+		[HttpPost]
+		[Route("DnD/Char/Update")]
+		public void UpdateCharacter()
+		{
+
+			string name;
+			string level;
+			string race;
+			string classs;
+			string age;
+			string gender;
+			string bio;
+			string spellCaster;
+			string hitScore;
+		
+
+			try
+			{
+				Dictionary<string, object> req = (Dictionary<string, object>)Request.Content.ReadAsAsync<Dictionary<string, object>>().Result;
+				name = Convert.ToString(req["name"]);
+				level = Convert.ToString(req["level"]);
+				race = Convert.ToString(req["race"]);
+				classs = Convert.ToString(req["class"]);
+				age = Convert.ToString(req["age"]);
+				gender = Convert.ToString(req["gender"]);
+				bio = Convert.ToString(req["bio"]);
+				spellCaster = Convert.ToString(req["spellCaster"]);
+				hitScore = Convert.ToString(req["hitScore"]);
+
+
+				try
+				{
+					DatabaseConnection();
+					using (SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=C:\\Users\\Navindu\\source\\repos\\DnDBuilder\\DnDBuilder\\bin\\DnD.sqlite"))
+					{
+						m_dbConn.Open(); //open the connection
+						SQLiteCommand checkDb = new SQLiteCommand("SELECT count(*) FROM characters WHERE name='" + name + "'", m_dbConn); //setup the selection query
+						int count = Convert.ToInt32(checkDb.ExecuteScalar()); //execute the query and convert the returnedcount to an int.
+						if (count != 0)
+						{
+							SQLiteCommand updateSQL = new SQLiteCommand("UPDATE characters SET name = '" + name + "', age = '" + age + "', gender = '" + gender + "', bio = '" + bio + "', level =  '" + level + "', race = '" + race + "', class = '" + classs + "', spell_caster = '" + spellCaster + "', hit_points = '" + hitScore + "' WHERE name='" + name + "' ", m_dbConn); //set up the insert command
+
+							updateSQL.ExecuteNonQuery(); //execute the command
+						}
+					}
+				}
+				catch (Exception e) when (e is SQLiteException || e is InvalidCastException)
+				{
+					Console.WriteLine(e);
+				}
+
+				
+			}
+			catch (System.Web.Http.HttpResponseException ex)
+			{
+				throw new HttpResponseException(this.Request.CreateResponse<object>(HttpStatusCode.InternalServerError, "Error occurred : " + ex.Message));
+			}
+
+
+
+		}
+
+		[HttpPost]
+		[Route("DnD/Char/Delete/{userInput}")]
+		public void DeleteCharacter(string userInput)
+		{
+
+					try
+					{
+						DatabaseConnection();
+						using (SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=C:\\Users\\Navindu\\source\\repos\\DnDBuilder\\DnDBuilder\\bin\\DnD.sqlite"))
+						{
+							m_dbConn.Open(); //open the connection
+							SQLiteCommand checkDb = new SQLiteCommand("SELECT count(*) FROM characters WHERE name='" + userInput + "'", m_dbConn); //setup the selection query
+							int count = Convert.ToInt32(checkDb.ExecuteScalar()); //execute the query and convert the returnedcount to an int.
+							if (count != 0)
+							{
+								SQLiteCommand deleteSQL = new SQLiteCommand("DELETE FROM characters WHERE name = '" + userInput+ "'", m_dbConn); //set up the insert command
+
+								deleteSQL.ExecuteNonQuery(); //execute the command
+							}
+						}
+					}
+					catch (Exception e) when (e is SQLiteException || e is InvalidCastException)
+					{
+						Console.WriteLine(e);
+					}
+
+					
+				
+
+
+			
+
+		}
+
+
 
 
 
