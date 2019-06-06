@@ -7,20 +7,14 @@
     <title></title>
     <script src="Index.js"> </script>
     <script src="Character.js"> </script>
+   
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1>All Characters</h1>
+            <h1>Welcome to DnDBuilder</h1>
            
-            <br /> <br />
-            <asp:TextBox id="TextBox1" placeholder="Enter number" runat="server"></asp:TextBox>
-            <br /> <br />
-             <asp:Button id="btn" Text="Get Character Details" runat="server" OnClick="btn_Click"   />
-             <div id="users"></div>
-
-            <br />
-            <hr />
+          
             <h1>Navigation</h1>
             
           <asp:HyperLink NavigateUrl="~/AddCharacter.aspx" ID="HyperLink2" runat="server">Create a Character</asp:HyperLink>

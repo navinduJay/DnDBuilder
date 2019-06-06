@@ -203,7 +203,9 @@ namespace DnDBuilder.Controllers
 
 		[HttpPost]
 		[Route("DnD/Char/Add")]
-		public void AddCharacter() {
+		public string AddCharacter() {
+
+			string msg = null;
 
 			string name;
 			string age;
@@ -244,6 +246,12 @@ namespace DnDBuilder.Controllers
 							SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO characters(name,age,gender,bio,level,race,class,spell_caster,hit_points) VALUES ('" +name+ "', '" + age + "', '" + gender + "', '" + bio + "', '" + level + "', '" + race + "', '" + classs + "', '" + spellCaster + "', '" + hitPoints + "') ", m_dbConn); //set up the insert command
 							
 							insertSQL.ExecuteNonQuery(); //execute the command
+
+							msg = "Data successfully inserted!";
+
+						} else
+						{
+							msg = "Character already exists!";
 						}
 					}
 				}
@@ -258,9 +266,9 @@ namespace DnDBuilder.Controllers
 			{
 				throw new HttpResponseException(this.Request.CreateResponse<object>(HttpStatusCode.InternalServerError, "Error occurred : " + ex.Message));
 			}
-			
 
 
+			return msg;
 		}
 
 
@@ -321,17 +329,29 @@ namespace DnDBuilder.Controllers
 				using (SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=C:\\Users\\Navindu\\source\\repos\\DnDBuilder\\DnDBuilder\\bin\\DnD.sqlite"))
 				{
 					m_dbConn.Open();
-					string sql = "select * from characters where name = ('" + userInput + "') ";
-					SQLiteCommand command = new SQLiteCommand(sql, m_dbConn);
-					SQLiteDataReader reader = command.ExecuteReader();
-					var i = 1;
-					while (reader.Read())
-					{
+					SQLiteCommand checkDb = new SQLiteCommand("SELECT count(*) FROM characters WHERE name='" + userInput + "'", m_dbConn); //setup the selection query
+					int count = Convert.ToInt32(checkDb.ExecuteScalar()); //execute the query and convert the returnedcount to an int.
 
-						dictionary.Add(i, new List<string> { (string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8] });
-						i = i + 1;
+					if(count == 0)
+					{
+						dictionary.Add(1, new List<string> { "No such character!" });
+					} else
+					{
+						string sql = "select * from characters where name = ('" + userInput + "') ";
+						SQLiteCommand command = new SQLiteCommand(sql, m_dbConn);
+						SQLiteDataReader reader = command.ExecuteReader();
+						var i = 1;
+						while (reader.Read())
+						{
+
+							dictionary.Add(i, new List<string> { (string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8] });
+							i = i + 1;
+
+						}
 
 					}
+
+				
 				}
 			}
 			catch (Exception e) when (e is NullReferenceException || e is SQLiteException || e is InvalidCastException)
@@ -349,8 +369,9 @@ namespace DnDBuilder.Controllers
 
 		[HttpPost]
 		[Route("DnD/Char/Update")]
-		public void UpdateCharacter()
+		public string UpdateCharacter()
 		{
+			string msg = null;
 
 			string name;
 			string level;
@@ -390,6 +411,7 @@ namespace DnDBuilder.Controllers
 							SQLiteCommand updateSQL = new SQLiteCommand("UPDATE characters SET name = '" + name + "', age = '" + age + "', gender = '" + gender + "', bio = '" + bio + "', level =  '" + level + "', race = '" + race + "', class = '" + classs + "', spell_caster = '" + spellCaster + "', hit_points = '" + hitScore + "' WHERE name='" + name + "' ", m_dbConn); //set up the insert command
 
 							updateSQL.ExecuteNonQuery(); //execute the command
+							msg = "Data updated successfully!";
 						}
 					}
 				}
@@ -405,15 +427,15 @@ namespace DnDBuilder.Controllers
 				throw new HttpResponseException(this.Request.CreateResponse<object>(HttpStatusCode.InternalServerError, "Error occurred : " + ex.Message));
 			}
 
-
+			return msg;
 
 		}
 
 		[HttpPost]
 		[Route("DnD/Char/Delete/{userInput}")]
-		public void DeleteCharacter(string userInput)
+		public string DeleteCharacter(string userInput)
 		{
-
+			string msg = null;
 					try
 					{
 						DatabaseConnection();
@@ -427,6 +449,7 @@ namespace DnDBuilder.Controllers
 								SQLiteCommand deleteSQL = new SQLiteCommand("DELETE FROM characters WHERE name = '" + userInput+ "'", m_dbConn); //set up the insert command
 
 								deleteSQL.ExecuteNonQuery(); //execute the command
+								msg = "Deleted Successfully!";
 							}
 						}
 					}
@@ -435,10 +458,10 @@ namespace DnDBuilder.Controllers
 						Console.WriteLine(e);
 					}
 
-					
-				
 
 
+
+			return msg;
 			
 
 		}

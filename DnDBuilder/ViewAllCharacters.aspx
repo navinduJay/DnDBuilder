@@ -27,6 +27,8 @@ tr:nth-child(even) {
 </head>
 <body>
     <h1>Character List</h1>
+     <asp:HyperLink NavigateUrl="~/Index.aspx" ID="HyperLink10" runat="server">Home</asp:HyperLink>
+    <br /> <br />
     <form id="form1" runat="server">
         <div>
             
@@ -39,8 +41,8 @@ tr:nth-child(even) {
   </tr>
         
   </table>
-
-             <input type="button" id="abutton" onclick="viewCharacters()"  value="Update Information" />
+            <br />
+            <asp:HyperLink NavigateUrl="~/UpdateAllCharacters.aspx" ID="HyperLink11" runat="server">Edit Characters</asp:HyperLink>
 
         </div>
     </form>

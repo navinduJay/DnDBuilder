@@ -62,3 +62,4 @@ C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csproj.CopyComplete
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.dll
 C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.pdb
+C:\Users\Navindu\source\repos\DnDBuilder\DnDBuilder\obj\Debug\DnDBuilder.csprojAssemblyReference.cache

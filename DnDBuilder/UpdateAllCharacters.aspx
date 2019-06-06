@@ -24,12 +24,19 @@ tr:nth-child(even) {
     </style>
     <script src="Character.js"></script>
      <script src="Index.js"></script>
+
+
+ 
     
 </head>
 
 <body>
-    <h1>Character Database</h1>
+    <h1>Edit Characters</h1>
+    <asp:HyperLink NavigateUrl="~/Index.aspx" ID="HyperLink20" runat="server">Home</asp:HyperLink>
+    <h2>Character Database</h2>
+     
     <form id="form1" runat="server">
+        
         <div>
                <table id="table" >
   <tr>
@@ -45,7 +52,7 @@ tr:nth-child(even) {
             <hr />
             <br />
             <div>
-            <h1>Update Character Details</h1>
+            <h2>Update Character Details</h2>
             
 
 
@@ -141,8 +148,10 @@ tr:nth-child(even) {
 
                     <tr>
                        
-                         <td> <input type="button" id="abutton" onclick="updateCharacter()"  value="Save Character" /> </td>
+                         <td> <input type="button" id="abutton" onclick="updateCharacter()"  value="Update Character" /> </td>
                           <td> <input type="button" id="abuttontwo" onclick="deleteCharacter()"  value="Delete Character" /> </td>
+                          <td> <input type="button" onclick="download()" value="Download Character Details as an XML File"/> </td>
+                        
                     </tr>
                 </table>
 

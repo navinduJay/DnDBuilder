@@ -1,26 +1,4 @@
-﻿
-function init() {
-    
-    let xmlHttp = new XMLHttpRequest();
-    let userInput = document.getElementById('TextBox1').value;
-    let dest = '/DnD/Char/' + userInput
-    
-    xmlHttp.open("GET", dest , true);
-
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4) {
-            if (xmlHttp.status == 200) {
-                var retVal = JSON.parse(this.responseText);
-
-                console.log(retVal);
-                
-            }
-        }
-    }
-    xmlHttp.send();    
-}
-
-function getRaces() {
+﻿function getRaces() {
 
     let xmlHttp = new XMLHttpRequest();
     var elementRace = document.getElementById('race');
@@ -33,16 +11,20 @@ function getRaces() {
             if (xmlHttp.status == 200) {
 
                 var retVal = JSON.parse(this.responseText);
-         
+
                 var totalResult = (retVal.results).length;
 
                 for (let i = 0; i < totalResult; i++) {
-                   
+
                     elementRace.options[i] = new Option(retVal.results[i].name);
-                    
+
                 }
+            } else {
+                console.log("200 NOT OK!")
             }
-        }   
+        } else {
+            console.log("Request failed!");
+        }
     }
     xmlHttp.send();
     getClasses();
@@ -69,15 +51,21 @@ function getClasses() {
 
                 var retVal = JSON.parse(this.responseText);
                 var totalResult = (retVal.results).length;
+                console.log(retVal);
 
-               
                 let i = 0;
-                for (i ; i < totalResult; i++) {
-                    
+                for (i; i < totalResult; i++) {
+
                     elementClass.options[i] = new Option(retVal.results[i].name);
-                   
-                }   
+
+                }
+            } else {
+
+                console.log("200 NOT OK!");
             }
+        } else {
+
+            console.log("Request failed!");
         }
     }
     xmlHttp.send();
@@ -176,9 +164,9 @@ function getEntry() {
                             // level value calculation
                             var result = retVal.hit_die * parseFloat(x);
 
-                            
 
-                           // Javascript string validations
+
+                            // Javascript string validations
 
                             if (name == '') {
                                 nameError.innerHTML = 'Name can not be empty!';
@@ -202,13 +190,17 @@ function getEntry() {
                             } else {
                                 score.innerHTML = result;
                             }
-                                             
-                   
+
+
                         }
                     }
                 }
                 req.send();
+            } else {
+                console.log("200 NOT OK!")
             }
+        } else {
+            console.log("Request failed!")
         }
     }
     xmlHttp.send();
@@ -227,33 +219,41 @@ function viewCharacters() {
 
     xhr.onreadystatechange = function () {
 
-        let retVal = JSON.parse(this.responseText);
-        //console.log(retVal[]);
-        let newReq = new XMLHttpRequest();
-        let newDest = '/DnD/Char/View/Update'
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                let retVal = JSON.parse(this.responseText);
+               console.log("hi");
+                let newReq = new XMLHttpRequest();
+                let newDest = '/DnD/Char/View/Update'
 
 
 
-        for (var i = 1;  retVal[i][0].length; i++) {
+                for (var i = 1; retVal[i][0].length; i++) {
 
-            var row = table.insertRow(1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            cell1.innerHTML = retVal[i][0];
-            cell2.innerHTML = retVal[i][1]
-            cell3.innerHTML = retVal[i][2];
-            cell4.innerHTML = retVal[i][3];
+                    var row = table.insertRow(1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    cell1.innerHTML = retVal[i][0];
+                    cell2.innerHTML = retVal[i][1]
+                    cell3.innerHTML = retVal[i][2];
+                    cell4.innerHTML = retVal[i][3];
+                }
+
+
+
+
+
+           } else {
+                console.log("200 NOT OK!")
+           }
+        } else {
+
+            console.log("Request failed!");
         }
 
-
-
-
-
     }
-
-
 
     xhr.send();
 

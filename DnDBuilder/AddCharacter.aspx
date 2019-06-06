@@ -14,7 +14,7 @@
         <div>
             <h1>Create a New Character</h1>
             <p>
-                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+                <asp:HyperLink NavigateUrl="~/Index.aspx" ID="HyperLink1" runat="server">Home</asp:HyperLink>
             </p>
             
 
@@ -98,7 +98,7 @@
 
                     <tr>
                         <td><asp:Label Text=" " runat="server" /></td>
-                         <td> <input type="button" id="abutton" onclick="getCharacterInfo()"  value="Save Character" /> </td>
+                         <td> <input type="button" id="abutton" onclick="saveCharacterInfo()"  value="Save Character" /> </td>
                     </tr>
                 </table>
 

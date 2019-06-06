@@ -1,5 +1,5 @@
 ﻿
-function getCharacterInfo() {
+function saveCharacterInfo() {
 
    let name = document.getElementById('name').value;
    let age = document.getElementById('txtAge').value;
@@ -22,6 +22,14 @@ function getCharacterInfo() {
 
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("Response-type", "application/json");
+
+
+    xhr.onreadystatechange = function () {
+
+        let msg = JSON.parse(this.responseText);
+
+        alert(msg);
+    }
 
     var character = {
         "name": name,
@@ -115,19 +123,26 @@ function searchCharacter() {
     xhr.onreadystatechange = function () {
 
         let retVal = JSON.parse(this.responseText);
-        console.log(retVal[1][6]);
 
+        if (retVal[1][0] == "No such character!") {
 
-        name.value = retVal[1][0];
-        level.value = retVal[1][4];
-        race.value = retVal[1][5];
-        classs.value = (retVal[1][6]);
-        age.value = retVal[1][1]
-        gender.value = retVal[1][2]
-        bio.value = retVal[1][3]
-        spellCaster.innerHTML = retVal[1][7]
-        hitScore.innerHTML = retVal[1][8]
+            alert("No such Character!");
 
+        } else {
+
+            name.value = retVal[1][0];
+            level.value = retVal[1][4];
+            race.value = retVal[1][5];
+            classs.value = (retVal[1][6]);
+            age.value = retVal[1][1]
+            gender.value = retVal[1][2]
+            bio.value = retVal[1][3]
+            spellCaster.innerHTML = retVal[1][7]
+            hitScore.innerHTML = retVal[1][8]
+
+        }
+
+ 
 
 
 
@@ -155,6 +170,11 @@ function updateCharacter() {
     let dest = '/DnD/Char/Update'
 
     xhr.open("POST", dest, true);
+
+    xhr.onreadystatechange = function () {
+        let retVal = JSON.parse(this.responseText);
+        alert(retVal);
+    }
 
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("Response-type", "application/json");
@@ -188,6 +208,11 @@ function deleteCharacter() {
 
         xhr.open("POST", dest, true);
 
+        xhr.onreadystatechange = function () {
+
+            let retVal = JSON.parse(this.responseText);
+            alert(retVal);
+        }
 
         xhr.send();
 
@@ -195,10 +220,54 @@ function deleteCharacter() {
     
     console.log(name);
    
+}
 
+function download() {
 
+    let name = document.getElementById('name').value;
+    let level = document.getElementById('level').value;
+    let race = document.getElementById('race').value;
+    let classs = document.getElementById('class').value;
+    let age = document.getElementById('txtAge').value;
+    let gender = document.getElementById('DropDownList1').value;
+    let bio = document.getElementById('bio').value;
+    let hitScore = document.getElementById('cScore').textContent;
+    let spellCaster = document.getElementById('isASpellcaster').textContent;
 
+    
 
+    
+        const blob = new Blob([
 
+            "<Character>" + "\n",
+            "Name: " + name + "\n",
+            "Age: " + age + "\n",
+            "Gender: " + gender + "\n",
+            "Biography: " + bio + "\n",
+            "Level: " + level + "\n",
+            "Race: " + race + "\n",
+            "Class: " + classs + "\n",
+            "Spellcaster: " + spellCaster + "\n",
+            "Hit Score: " + hitScore + "\n",
+            "</Character>"
 
+        ], { type: 'text/html' });
+
+        downloadFile(blob, "Character.xml");
+ 
+   
+   
+    
+}
+
+function downloadFile(blob, fileName) {
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = fileName;
+
+    a.click();
 }
