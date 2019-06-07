@@ -24,3 +24,10 @@ This application is developed using Microsoft Visual Studio Community 2019 along
  <li>Then click on ‘Build’ and then select ‘Build Solution’ to build the whole application.</li>
  <li>Run the application by clicking on the play button</li>
 </ul>
+
+<h3>External API Used</h3>
+<a href="http://www.dnd5eapi.co/">The 5th Edition Dungeons and Dragons API</a>
+
+<h3>Database - SQLITE</h3>
+
+<h3>Author - <a href="https://github.com/navinduJay">Navindu Jayatilake</a></>
