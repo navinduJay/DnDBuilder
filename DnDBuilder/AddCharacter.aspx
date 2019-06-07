@@ -42,7 +42,7 @@
                     </tr>
                       <tr>
                         <td><asp:Label Text="Biography" runat="server" /></td>
-                        <td><asp:TextBox ID="bio" TextMode="MultiLine" runat="server"></asp:TextBox></td>
+                        <td><asp:TextBox ID="bio"  TextMode="MultiLine" runat="server"></asp:TextBox></td>
                     </tr>
                       <tr>
                         <td><asp:Label Text="Level" runat="server" /></td>
@@ -54,11 +54,7 @@
                      <tr>
                         <td><asp:Label Text="Race" runat="server" /></td>
                         <td>    
-                            <!--
-                              <select id="race">
-                            <option></option>
-                            </select>
-                            -->
+                         
                             <asp:DropDownList  ID="race" runat="server">
                                  <asp:ListItem></asp:ListItem>
                             </asp:DropDownList>

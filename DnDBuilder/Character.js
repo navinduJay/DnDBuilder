@@ -11,42 +11,49 @@ function saveCharacterInfo() {
    let spellCaster = document.getElementById('isASpellcaster').textContent;
    let hitScore = document.getElementById('cScore').textContent;
 
- 
-    let xhr = new XMLHttpRequest();
-
-    let dest = '/DnD/Char/Add';
-
-    xhr.open('POST', dest, true);
-
-    
-
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.setRequestHeader("Response-type", "application/json");
-
-
-    xhr.onreadystatechange = function () {
-
-        let msg = JSON.parse(this.responseText);
-
-        alert(msg);
+    if (name == "") {
+        alert("Name should not be empty!");
     }
+    else if (age < 0 || age > 500) {
+        alert("Age should be in between 0-500");
+    } else {
+        let xhr = new XMLHttpRequest();
 
-    var character = {
-        "name": name,
-        "age": age,
-        "gender": gender,
-        "bio": bio,
-        "level": level,
-        "race": race,
-        "class": classs,
-        "spellCaster": spellCaster,
-        "hitScore": hitScore
-    };
+        let dest = '/DnD/Char/Add';
 
+        xhr.open('POST', dest, true);
+
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader("Response-type", "application/json");
 
 
-    xhr.send(JSON.stringify(character));
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    let msg = JSON.parse(this.responseText);
 
+                    alert(msg);
+                } else {
+                    console.log("200 NOT OK!")
+                }
+            } else {
+                console.log("Request failed!");
+            }
+        }
+
+        var character = {
+            "name": name,
+            "age": age,
+            "gender": gender,
+            "bio": bio,
+            "level": level,
+            "race": race,
+            "class": classs,
+            "spellCaster": spellCaster,
+            "hitScore": hitScore
+        };
+        xhr.send(JSON.stringify(character));
+    }
 
 }
 
@@ -64,11 +71,7 @@ function viewCharacters() {
 
     let retVal = JSON.parse(this.responseText);
        
-        let newReq = new  XMLHttpRequest();
-        let newDest = '/DnD/Char/View/Update'
 
-
-       
        for (var i = 1; i < retVal[i][0].length; i++) {
 
            var row = table.insertRow(1);
@@ -81,18 +84,8 @@ function viewCharacters() {
            cell3.innerHTML = retVal[i][2];
            cell4.innerHTML = retVal[i][3];
        }
-
-
-      
-     
-     
     }
-
-
-
     xhr.send();
-
-
 }
 
 
@@ -109,27 +102,19 @@ function searchCharacter() {
     let hitScore = document.getElementById('cScore');
     let searchName = document.getElementById('searchName').value;
 
-
-
     let xhr = new XMLHttpRequest();
 
     let dest = '/DnD/Char/Search/' + searchName
 
-
     xhr.open("GET", dest, false);
-
-
 
     xhr.onreadystatechange = function () {
 
         let retVal = JSON.parse(this.responseText);
-
+       
         if (retVal[1][0] == "No such character!") {
-
             alert("No such Character!");
-
         } else {
-
             name.value = retVal[1][0];
             level.value = retVal[1][4];
             race.value = retVal[1][5];
@@ -139,21 +124,12 @@ function searchCharacter() {
             bio.value = retVal[1][3]
             spellCaster.innerHTML = retVal[1][7]
             hitScore.innerHTML = retVal[1][8]
-
         }
-
- 
-
-
-
-
     }
     xhr.send();
-
 }
 
 function updateCharacter() {
-
 
     let name = document.getElementById('name').value;
     let level = document.getElementById('level').value;
@@ -172,8 +148,16 @@ function updateCharacter() {
     xhr.open("POST", dest, true);
 
     xhr.onreadystatechange = function () {
-        let retVal = JSON.parse(this.responseText);
-        alert(retVal);
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                let retVal = JSON.parse(this.responseText);
+                alert(retVal);
+            } else {
+                console.log("200 NOT OK!")
+            }
+        } else {
+            console.log("Request failed!");
+        }
     }
 
     xhr.setRequestHeader("Content-type", "application/json");
@@ -210,16 +194,22 @@ function deleteCharacter() {
 
         xhr.onreadystatechange = function () {
 
-            let retVal = JSON.parse(this.responseText);
-            alert(retVal);
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+
+                    let retVal = JSON.parse(this.responseText);
+                    alert(retVal);
+                } else {
+                    console.log("200 NOT OK!")
+                  
+                }
+            } else {
+                console.log("Request failed!");
+            }
         }
-
         xhr.send();
-
     }
-    
-    console.log(name);
-   
+ 
 }
 
 function download() {

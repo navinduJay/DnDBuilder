@@ -11,7 +11,7 @@
             if (xmlHttp.status == 200) {
 
                 var retVal = JSON.parse(this.responseText);
-
+                
                 var totalResult = (retVal.results).length;
 
                 for (let i = 0; i < totalResult; i++) {
@@ -51,8 +51,7 @@ function getClasses() {
 
                 var retVal = JSON.parse(this.responseText);
                 var totalResult = (retVal.results).length;
-                console.log(retVal);
-
+                
                 let i = 0;
                 for (i; i < totalResult; i++) {
 
@@ -222,11 +221,9 @@ function viewCharacters() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 let retVal = JSON.parse(this.responseText);
-               console.log("hi");
+               
                 let newReq = new XMLHttpRequest();
                 let newDest = '/DnD/Char/View/Update'
-
-
 
                 for (var i = 1; retVal[i][0].length; i++) {
 
@@ -240,24 +237,14 @@ function viewCharacters() {
                     cell3.innerHTML = retVal[i][2];
                     cell4.innerHTML = retVal[i][3];
                 }
-
-
-
-
-
            } else {
                 console.log("200 NOT OK!")
            }
         } else {
-
             console.log("Request failed!");
         }
-
     }
-
     xhr.send();
-
-
 }
 
 

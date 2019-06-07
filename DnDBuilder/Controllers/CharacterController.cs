@@ -201,9 +201,11 @@ namespace DnDBuilder.Controllers
 		}
 
 
+
 		[HttpPost]
 		[Route("DnD/Char/Add")]
-		public string AddCharacter() {
+		public string AddCharacter()
+		{
 
 			string msg = null;
 
@@ -230,8 +232,8 @@ namespace DnDBuilder.Controllers
 				spellCaster = Convert.ToString(req["spellCaster"]);
 				hitPoints = Convert.ToString(req["hitScore"]);
 
-			
-				
+
+
 
 				try
 				{
@@ -243,13 +245,14 @@ namespace DnDBuilder.Controllers
 						int count = Convert.ToInt32(checkDb.ExecuteScalar()); //execute the query and convert the returnedcount to an int.
 						if (count == 0)
 						{
-							SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO characters(name,age,gender,bio,level,race,class,spell_caster,hit_points) VALUES ('" +name+ "', '" + age + "', '" + gender + "', '" + bio + "', '" + level + "', '" + race + "', '" + classs + "', '" + spellCaster + "', '" + hitPoints + "') ", m_dbConn); //set up the insert command
-							
+							SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO characters(name,age,gender,bio,level,race,class,spell_caster,hit_points) VALUES ('" + name + "', '" + age + "', '" + gender + "', '" + bio + "', '" + level + "', '" + race + "', '" + classs + "', '" + spellCaster + "', '" + hitPoints + "') ", m_dbConn); //set up the insert command
+
 							insertSQL.ExecuteNonQuery(); //execute the command
 
 							msg = "Data successfully inserted!";
 
-						} else
+						}
+						else
 						{
 							msg = "Character already exists!";
 						}
@@ -270,7 +273,6 @@ namespace DnDBuilder.Controllers
 
 			return msg;
 		}
-
 
 
 
