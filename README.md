@@ -1,6 +1,6 @@
 # DnDBuilder
 
-C# ASP.NET Web application for building and storing tabletop
+C# ASP.NET RESTful Web application for building and storing tabletop
 role playing game characters, called DndBuilder!
 
 <h3>Architecture</h3>
