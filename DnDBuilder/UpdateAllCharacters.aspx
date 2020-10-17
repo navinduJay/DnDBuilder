@@ -85,7 +85,7 @@ tr:nth-child(even) {
                                  <asp:ListItem Enabled="true" Text="Select Gender" Value="-1"></asp:ListItem>
                                  <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
                                  <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
-                                 <asp:ListItem Text="Shemale" Value="Shemale"></asp:ListItem>
+                                 <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
                             </asp:DropDownList>
                              
                             </td>
